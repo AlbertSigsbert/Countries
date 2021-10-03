@@ -1,0 +1,80 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap');
+:root{
+   /* Dark Mode colors */
+  --dark-bg: hsl(207, 26%, 17%);
+  --dark-elements: hsl(209, 23%, 22%);
+  --text-dark: hsl(0, 0%, 100%);
+
+     /* Light Mode colors */
+  --light-bg:hsl(0, 0%, 98%);
+  --light-elements: hsl(0, 0%, 100%);
+  --text-light:hsl(200, 15%, 8%);
+  --input-light: hsl(0, 0%, 52%);
+
+  /*Typography*/
+  --home-fs:14px;
+  --about-fs:16px;
+  --ff:'Nunito', sans-serif;
+
+  /* General Theming */
+  --bg-color:hsl(207, 26%, 17%);
+  --text-color:hsl(0, 0%, 100%);
+  --elements-color:hsl(209, 23%, 22%);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent; 
+}
+
+
+body{
+    font-family: var(--ff);
+    font-size: var(--home-fs);
+    background: var(--bg-color);
+    color:var(--text-color);
+}
+
+
+a{
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+/* Navbar */
+nav{
+    background: var(--elements-color);
+    height: 4rem;
+    width: 100%;
+    position: relative;
+    box-shadow: 2.0px 4.0px 4.0px var(--bg-color);
+}
+
+.nav-wrapper{
+    position: absolute;
+    inset: 0;
+    /* padding: 2rem; */
+    margin: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#toggle-icon{
+    margin-right:8px;
+}
