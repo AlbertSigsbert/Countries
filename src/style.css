@@ -10,7 +10,7 @@
   --light-bg:hsl(0, 0%, 98%);
   --light-elements: hsl(0, 0%, 100%);
   --text-light:hsl(200, 15%, 8%);
-  --input-light: hsl(0, 0%, 52%);
+  --txt-input-light: hsl(0, 0%, 52%);
 
   /*Typography*/
   --home-fs:14px;
@@ -21,6 +21,7 @@
   --bg-color:hsl(207, 26%, 17%);
   --text-color:hsl(0, 0%, 100%);
   --elements-color:hsl(209, 23%, 22%);
+  --input-color:hsl(0, 0%, 100%);
 }
 
 
@@ -77,4 +78,92 @@ nav{
 
 #toggle-icon{
     margin-right:8px;
+}
+
+/* Filters & search section */
+.section-wrapper{
+    margin: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search{
+    position: relative;
+    display: flex;
+    min-width: 100px; 
+}
+
+.fa-search{
+    position: absolute;
+    top: .8rem;
+    left: 1rem;
+    width: 1rem;
+    color: var(--input-color);
+}
+
+.search-input{
+    border: 1px solid transparent;
+    border-radius: 5px;
+    height: 2.8rem;
+    width: 100%;
+    min-width: 30rem;
+    padding: 1rem 1.5rem; 
+    background: var(--elements-color); 
+    outline: 0;
+    text-indent: 1.5rem;
+    caret-color: var(--text-color);
+    font-size: var(--home-fs);
+   
+}
+
+::placeholder { 
+    color: var(--input-color);
+    
+}
+
+.search-input:hover, .search-input:focus {
+    border: 1.5px solid var(--elements-color);
+    
+  }
+
+.filter-dropdown{
+    position: relative;
+    display: inline-block;
+    
+}
+.dropbtn{
+    border: 1px solid transparent;
+    border-radius: 5px;
+    height: 2.8rem;
+    width: 100%;
+    padding: 1rem; 
+    background: var(--elements-color); 
+    color: var(--text-color);
+   
+}
+
+.dropbtn span:first-child{
+    margin-right: 2rem;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: var(--elements-color); 
+    margin-top: .3rem;
+    z-index: 1;
+    width: 100%;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.regions{
+    display: flex;
+    flex-direction: column;
+}
+
+.regions a{
+    padding: .5rem 1rem;
 }
