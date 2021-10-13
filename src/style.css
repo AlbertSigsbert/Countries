@@ -238,7 +238,14 @@ nav{
    
 }
 
-
+/* xs mobile (Galaxyfold, iphone5) */
+/* Media Queries */
+@media(max-width:350px){
+ .nav-wrapper{
+     font-size: 10px;
+     margin: 0 1rem;
+ }
+}
 /* Mobile Landscape */
 @media only screen and (min-device-width: 480px) 
                    and (max-device-width: 850px) 
