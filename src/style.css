@@ -22,6 +22,7 @@
   --text-color:hsl(0, 0%, 100%);
   --elements-color:hsl(209, 23%, 22%);
   --input-color:hsl(0, 0%, 100%);
+  --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 
@@ -114,6 +115,7 @@ nav{
     text-indent: 1.5rem;
     caret-color: var(--text-color);
     font-size: var(--home-fs);
+    box-shadow: var(--box-shadow);
    
 }
 
@@ -140,6 +142,7 @@ nav{
     padding: 1rem; 
     background: var(--elements-color); 
     color: var(--text-color);
+    box-shadow: var(--box-shadow);
    
 }
 
@@ -153,6 +156,7 @@ nav{
     margin-top: .3rem;
     z-index: 1;
     width: 100%;
+    box-shadow: var(--box-shadow);
 }
 
 .dropdown-content.show {
@@ -167,3 +171,130 @@ nav{
 .regions a{
     padding: .5rem 1rem;
 }
+
+/* Countries Cards */
+.countries {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 4rem;
+    margin: 3rem;
+}
+
+.card{
+    background: var(--elements-color);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    height: 20rem;
+    box-shadow: var(--box-shadow);
+}
+.card-img {
+    width: 100%;
+    /* height: 20vh; */
+    height: 10rem;
+    object-fit: cover;
+}
+
+.card-body{
+    padding: 1rem;
+}
+
+.card-title{
+    padding-bottom: 1rem;
+}
+
+
+/* Media Queries */
+@media(max-width:700px){
+    nav{
+        height: 6rem;   
+    }
+
+    .nav-wrapper{
+        font-size: 12px;
+        margin: 0 2rem;
+    }
+
+    .section-wrapper{
+       flex-wrap: wrap;
+       justify-content: flex-start;
+       margin: 2rem;
+    }
+
+    .search{
+        min-width: 100%;
+    }
+    
+    .search-input{ 
+        margin-bottom:2rem;  
+        width: 100%;
+        min-width: 100%; 
+    }
+    .countries {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 2rem;
+        margin: 3.5rem;
+    }
+
+   
+}
+
+
+/* Mobile Landscape */
+@media only screen and (min-device-width: 480px) 
+                   and (max-device-width: 850px) 
+                   and (orientation: landscape) {
+        nav{
+            height: 6rem;   
+        }
+    
+        .nav-wrapper{
+            font-size: 12px;
+            margin: 0 2rem;
+        }
+    
+        .section-wrapper{
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin: 2rem;
+        }
+    
+        .search{
+            min-width: 100%;
+        }
+        
+        .search-input{ 
+            margin-bottom:2rem;  
+            width: 100%;
+            min-width: 100%; 
+        }
+
+        .countries {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 2rem;
+            margin: 3rem;
+        }
+                  
+    }
+
+/* ----------- iPad  ----------- */
+/* Portrait  */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+
+    .countries {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+        margin: 3rem;
+    }
+}
+
+/* iPad Landscape */
+@media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {}
+
+/* ----------- iPad Pro ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-width: 1024px) 
+  and (max-height: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {}
