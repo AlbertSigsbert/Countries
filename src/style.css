@@ -116,7 +116,7 @@ nav{
     caret-color: var(--text-color);
     font-size: var(--home-fs);
     box-shadow: var(--box-shadow);
-   
+    color: var(--text-color);
 }
 
 ::placeholder { 
@@ -228,6 +228,7 @@ nav{
         margin-bottom:2rem;  
         width: 100%;
         min-width: 100%; 
+       
     }
     .countries {
         grid-template-columns: repeat(1, 1fr);

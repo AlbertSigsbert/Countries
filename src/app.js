@@ -46,12 +46,16 @@ const switchToDarkMode  = () => {
 
 //On Document Load
 document.addEventListener('DOMContentLoaded', () => {
+    //Check color theme
     const isDark = localStorage.getItem('isDark');
      (isDark === 'yes') ?    switchToDarkMode() : switchToLightMode();
+
+     //Render all Countries
+     getAllCountries();
        
 })
 
-//On icon Click
+//On darkMode icon Click
 darkModeToggle.addEventListener('click', e => {
     darkMode ? switchToLightMode() :  switchToDarkMode();
     refresh();
@@ -67,46 +71,105 @@ dropBtn.addEventListener('click', e => {
     e.preventDefault();
 })
 
-//API REQUESTS
-axios.get('https://restcountries.com/v3.1/all')
-.then(function (response) {
-    // handle success
-    // console.log(response.data);
-      
-    const countriesData = response.data;
 
-     //Render to UI
-     const countries = document.querySelector('.countries');
+//Render Countries to UI 
+const renderCountries = countriesData => {
+    const countries = document.querySelector('.countries');
 
-     let output = '';
-     countriesData.forEach(country => {
+    let output = '';
+    countriesData.forEach(country => {
+         output += `
+           <div class="card">
+           <img class="card-img" src="${country.flags.svg}" alt="">
+           <div class="card-body">
+               <h3 class="card-title">${country.name.common}</h3>
+               <ul>
+                 <li>Population: ${country.population}</li>
+                 <li>Region: ${country.region}</li>
+                 <li>Capital: ${country.capital}</li>
+               </ul>
+              
+           </div>
+           </div>
+         `;  
+   });
+   
+   countries.innerHTML = output;
+}
+
+
+//SEARCH EVENT
+// Get the input field
+const searchInput = document.getElementById("search-input");
+
+searchInput.addEventListener('keyup' , e => {
+    if(e.key === 'Enter'){
+
+        const value = e.target.value.toLowerCase();
+
+        getSpecificCountry(value);
+
+        e.target.value = '';
          
+        e.preventDefault();
+    }
+})
 
-          output += `
-            <div class="card">
-            <img class="card-img" src="${country.flags.svg}" alt="">
-            <div class="card-body">
-                <h3 class="card-title">${country.name.common}</h3>
-                <ul>
-                  <li>Population: ${country.population}</li>
-                  <li>Region: ${country.region}</li>
-                  <li>Capital: ${country.capital}</li>
-                </ul>
-               
-            </div>
-            </div>
-          `;
+//DROPDOWN LIST SELECT EVENT
+const regions =document.querySelectorAll('.region');
+regions.forEach( region => {
 
-          
-    });
+    region.addEventListener('click', e => {
+        const value = e.target.innerHTML.toLowerCase();
+
+        getRegionCountries(value);
+
+        dropContent.classList.remove('show');
+
+        e.preventDefault();
+    })
     
-    countries.innerHTML = output;
-
- 
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-
-
+});
+//API REQUESTS 
+//Get all countries
+const getAllCountries = () => {
+    axios.get('https://restcountries.com/v3.1/all')
+    .then(function (response) {
+          
+        const countriesData = response.data;
+        renderCountries(countriesData);
+    
+    }).catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+}
+  
+//Get specific country
+const getSpecificCountry = (name) => {
+    axios.get(`https://restcountries.com/v3.1/name/${name}`)
+    .then(function (response) {
+          
+        const countriesData = response.data;
+        renderCountries(countriesData);
+    
+    }).catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+}
+  
+//Get countries by region
+const  getRegionCountries = (region) => {
+    axios.get(`https://restcountries.com/v3.1/region/${region}`)
+    .then(function (response) {
+          
+        const countriesData = response.data;
+        renderCountries(countriesData);
+    
+    }).catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+}
+  
