@@ -44,17 +44,6 @@ const switchToDarkMode  = () => {
  
 };
 
-//On Document Load
-document.addEventListener('DOMContentLoaded', () => {
-    //Check color theme
-    const isDark = localStorage.getItem('isDark');
-     (isDark === 'yes') ?    switchToDarkMode() : switchToLightMode();
-
-     //Render all Countries
-     getAllCountries();
-       
-})
-
 //On darkMode icon Click
 darkModeToggle.addEventListener('click', e => {
     darkMode ? switchToLightMode() :  switchToDarkMode();
@@ -62,6 +51,24 @@ darkModeToggle.addEventListener('click', e => {
     e.preventDefault();
 })
 
+
+//On Document Load
+document.addEventListener('DOMContentLoaded', () => {
+    //Check color theme
+    const isDark = localStorage.getItem('isDark');
+    (isDark === 'yes') ?    switchToDarkMode() : switchToLightMode();
+
+    //Render content to UI based ON page
+    const url = window.location.href.toString();
+    
+     
+    url.includes('index') ? getAllCountries() : CountryPageInit();
+
+    //Render HomePage Event Listners
+    url.includes('index') ? loadHomeEventListeners(): loadEventListeners();
+})
+
+const loadHomeEventListeners = () => {
 //Dropdown toggle
 const dropBtn = document.querySelector('.dropbtn');
 const dropContent = document.querySelector('.dropdown-content');
@@ -70,32 +77,6 @@ dropBtn.addEventListener('click', e => {
     dropContent.classList.toggle('show');
     e.preventDefault();
 })
-
-
-//Render Countries to UI 
-const renderCountries = countriesData => {
-    const countries = document.querySelector('.countries');
-
-    let output = '';
-    countriesData.forEach(country => {
-         output += `
-           <div class="card">
-           <img class="card-img" src="${country.flags.svg}" alt="">
-           <div class="card-body">
-               <h3 class="card-title">${country.name.common}</h3>
-               <ul>
-                 <li>Population: ${country.population}</li>
-                 <li>Region: ${country.region}</li>
-                 <li>Capital: ${country.capital}</li>
-               </ul>
-              
-           </div>
-           </div>
-         `;  
-   });
-   
-   countries.innerHTML = output;
-}
 
 
 //SEARCH EVENT
@@ -129,7 +110,161 @@ regions.forEach( region => {
         e.preventDefault();
     })
     
-});
+  });
+
+// //SAVE COUNTRY NAME TO LS && REDIRECTING
+const saveName = (e) => {
+     if(e.target.parentElement.classList.contains('country-link'))
+     {
+        const link = e.target.parentElement;
+
+        const countryName = link.getAttribute('data-name').toLowerCase();
+
+        //clear previous data
+         localStorage.removeItem('country-name');
+         //add data to storage
+        localStorage.setItem("country-name", countryName);
+
+        window.location.href = './country.html';
+     }
+}
+
+const countries = document.querySelector('.countries');
+
+countries.addEventListener('click', saveName);
+
+}
+
+const loadEventListeners = () => {
+    const backBtn = document.querySelector('.back-btn');
+
+    backBtn.addEventListener('click', () => {
+        window.location.href = './index.html';
+    })
+}
+//Render Countries to UI 
+const renderCountries = countriesData => {
+    const countries = document.querySelector('.countries');
+
+    let output = '';
+    countriesData.forEach(country => {
+         output += `
+           <div class="card">
+           <a data-name="${country.name.common}" class="country-link">
+             <img class="card-img" src="${country.flags.svg}" alt="${country.name.common}">
+           </a>
+          
+           <div class="card-body">
+               <a data-name="${country.name.common}" class="country-link">
+                 <h3 class="card-title">${country.name.common}</h3>
+               </a>
+               <ul>
+                 <li>
+                    <span class="item-key">Population: </span>
+                    <span class="item-value">${country.population.toLocaleString('en')}</span>
+                  </li>
+                 <li>
+                    <span class="item-key">Region: </span>
+                    <span class="item-value">${country.region}</span>
+                </li>
+                 <li>
+                    <span class="item-key">Capital: </span>
+                    <span class="item-value">${country.capital}</span>
+                </li>
+               </ul>
+              
+           </div>
+           </div>
+         `;  
+   });
+   
+   countries.innerHTML = output;
+}
+
+//Render Country to UI 
+const renderCountry = country => {
+    const countryElement = document.querySelector('.country');
+    const data = country[0];
+
+    console.log(data);
+  
+    const buildItem = (obj) => {
+        return item;
+     } ;
+     countryElement.innerHTML = ` 
+
+     <div class="country-image">
+            <img src="${data.flags.svg}" alt="${data.name.common}">
+        </div>
+        <div class="country-details">
+            <div class="details">
+                <div class="primary-details">
+                    <h3 class="country-name">${data.name.common}</h3>
+                    <ul>
+                        <li>
+                            <span class="item-key">Native Name: </span>
+                            <span class="item-value">${data.name}</span>
+                        </li>
+                        <li>
+                            <span class="item-key">Population: </span>
+                            <span class="item-value">${data.population.toLocaleString('en')}</span>
+                        </li>
+                        <li>
+                            <span class="item-key">Region: </span>
+                            <span class="item-value">${data.region}</span>
+                        </li>
+                        <li>
+                            <span class="item-key">Sub Region: </span>
+                            <span class="item-value">${data.subregion}</span>
+                        </li>
+                        <li>
+                            <span class="item-key">Capital: </span>
+                            <span class="item-value">${data.capital}</span>
+                        </li>
+            
+                    </ul>
+                </div>
+                <div class="secondary-details">
+                    <ul>
+                        <li>
+                            <span class="item-key">Top Level Domain: </span>
+                            <span class="item-value">${data.tld}</span>
+                        </li>
+                        <li>
+                            <span class="item-key">Currencies: </span>
+                            <span class="item-value">${data.currencies}</span>
+                        </li>
+                        <li>
+                            <span class="item-key">Languages: </span>
+                            <span class="item-value">${data.languages}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+           
+            <div class="border-countries">
+                <div class="border-countries-label">
+                    <h4>Border Countries:</h4>
+                </div>
+                <div class="border-countries-btns">
+                    <button class="country-btn">
+                        ${data.borders[0]}
+                    </button>
+                    <button class="country-btn">
+                        ${data.borders[1]}
+                    </button>
+                    <button class="country-btn">
+                        ${data.borders[2]}
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+   
+    `;
+       
+}
+
 //API REQUESTS 
 //Get all countries
 const getAllCountries = () => {
@@ -144,32 +279,64 @@ const getAllCountries = () => {
         console.log(error);
     })
 }
-  
+ 
+
 //Get specific country
 const getSpecificCountry = (name) => {
     axios.get(`https://restcountries.com/v3.1/name/${name}`)
-    .then(function (response) {
-          
+    .then(function (response) { 
         const countriesData = response.data;
+
         renderCountries(countriesData);
     
     }).catch(function (error) {
-        // handle error
+       
         console.log(error);
     })
 }
   
+ 
 //Get countries by region
 const  getRegionCountries = (region) => {
     axios.get(`https://restcountries.com/v3.1/region/${region}`)
     .then(function (response) {
           
         const countriesData = response.data;
+        
         renderCountries(countriesData);
     
     }).catch(function (error) {
-        // handle error
+       
         console.log(error);
     })
 }
-  
+
+
+
+
+//Get specific country (for Country Single Page)
+const getCountry = (name) => {
+
+    axios.get(`https://restcountries.com/v3.1/name/${name}`)
+    .then(function (response) {
+          
+        const countryData = response.data;
+
+        renderCountry(countryData);
+    
+    }).catch(function (error) {
+       
+        console.log(error);
+    })
+}
+
+
+const CountryPageInit = () => {
+     
+    // console.log('Hello this is counrty page!!!');
+     const name = JSON.stringify(localStorage.getItem('country-name'));
+
+     getCountry(name);
+
+   
+}
