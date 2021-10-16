@@ -54,6 +54,7 @@ a{
     text-decoration: none;
 }
 
+
 ul{
     list-style: none;
 }
@@ -202,6 +203,12 @@ nav{
     /* height: 20vh; */
     height: 10rem;
     object-fit: cover;
+    transition: all .5s ease-in;
+}
+
+.card-img:hover, .card-title:hover, .country-btn:hover{
+   cursor: pointer;
+   opacity: .8;
 }
 
 .card-body{
@@ -210,6 +217,7 @@ nav{
 
 .card-title{
     padding-bottom: 1rem;
+    transition: all .5s ease-in;
 }
 
 /* Single Country page styling */
@@ -259,7 +267,7 @@ nav{
 
 .border-countries{
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     margin-left: 4.5rem;   
 } 
 .border-countries-label{
@@ -272,12 +280,12 @@ nav{
     width: 6rem;
     padding: .5rem; 
     margin-right:1rem;
-    margin-bottom: 1rem; 
     background: var(--elements-color); 
     color: var(--text-color);
     box-shadow: var(--box-shadow);
-
+    transition: all .5s ease-in;
 }
+
 
 
 /* MEDIA QUERIES */

@@ -69,51 +69,51 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const loadHomeEventListeners = () => {
-//Dropdown toggle
-const dropBtn = document.querySelector('.dropbtn');
-const dropContent = document.querySelector('.dropdown-content');
+    //Dropdown toggle
+    const dropBtn = document.querySelector('.dropbtn');
+    const dropContent = document.querySelector('.dropdown-content');
 
-dropBtn.addEventListener('click', e => {
-    dropContent.classList.toggle('show');
-    e.preventDefault();
-})
-
-
-//SEARCH EVENT
-// Get the input field
-const searchInput = document.getElementById("search-input");
-
-searchInput.addEventListener('keyup' , e => {
-    if(e.key === 'Enter'){
-
-        const value = e.target.value.toLowerCase();
-
-        getSpecificCountry(value);
-
-        e.target.value = '';
-         
-        e.preventDefault();
-    }
-})
-
-//DROPDOWN LIST SELECT EVENT
-const regions =document.querySelectorAll('.region');
-regions.forEach( region => {
-
-    region.addEventListener('click', e => {
-        const value = e.target.innerHTML.toLowerCase();
-
-        getRegionCountries(value);
-
-        dropContent.classList.remove('show');
-
+    dropBtn.addEventListener('click', e => {
+        dropContent.classList.toggle('show');
         e.preventDefault();
     })
-    
-  });
 
-// //SAVE COUNTRY NAME TO LS && REDIRECTING
-const saveName = (e) => {
+
+    //SEARCH EVENT
+    // Get the input field
+    const searchInput = document.getElementById("search-input");
+
+    searchInput.addEventListener('keyup' , e => {
+        if(e.key === 'Enter'){
+
+            const value = e.target.value.toLowerCase();
+
+            getSpecificCountry(value);
+
+            e.target.value = '';
+            
+            e.preventDefault();
+        }
+    })
+
+    //DROPDOWN LIST SELECT EVENT
+    const regions =document.querySelectorAll('.region');
+    regions.forEach( region => {
+
+        region.addEventListener('click', e => {
+            const value = e.target.innerHTML.toLowerCase();
+
+            getRegionCountries(value);
+
+            dropContent.classList.remove('show');
+
+            e.preventDefault();
+        })
+        
+    });
+
+    //SAVE COUNTRY NAME TO LS && REDIRECTING
+     const saveName = (e) => {
      if(e.target.parentElement.classList.contains('country-link'))
      {
         const link = e.target.parentElement;
@@ -127,21 +127,52 @@ const saveName = (e) => {
 
         window.location.href = './country.html';
      }
+    }
+
+    const countries = document.querySelector('.countries');
+
+    countries.addEventListener('click', saveName);
+
 }
 
-const countries = document.querySelector('.countries');
+    //EVENT LISTENERS FOR COUNTRY PAGE
+    const loadEventListeners = () => {
+        const backBtn = document.querySelector('.back-btn');
 
-countries.addEventListener('click', saveName);
+        backBtn.addEventListener('click', () => {
+            window.location.href = './index.html';
+        })
 
-}
+        //SAVE COUNTRY NAME TO LS && REDIRECTING
+       const saveName = (e) => {
+        if(e.target.classList.contains('country-btn'))
+        {  
+            const btn = e.target;
+   
+            const countryCode = btn.value.toLowerCase();
 
-const loadEventListeners = () => {
-    const backBtn = document.querySelector('.back-btn');
+            //clear previous data
+             localStorage.removeItem('country-code');
 
-    backBtn.addEventListener('click', () => {
-        window.location.href = './index.html';
-    })
-}
+             //add data to storage
+             localStorage.setItem("country-code", countryCode);
+   
+             const code = JSON.stringify(localStorage.getItem('country-code'));
+             //Get country by code
+              getCountryByCode(code);
+
+             //refresh page
+              refresh();
+        }
+       }
+
+        const country = document.querySelector('.country');
+
+        country.addEventListener('click', saveName);
+    }
+
+
+
 //Render Countries to UI 
 const renderCountries = countriesData => {
     const countries = document.querySelector('.countries');
@@ -181,11 +212,11 @@ const renderCountries = countriesData => {
    countries.innerHTML = output;
 }
 
-//Render Country to UI 
+//Render Country to UI (Country.html)
 const renderCountry = country => {
     const countryElement = document.querySelector('.country');
     const data = country[0];
-    console.log(data);
+    
     //Format native Name
     const nativeNames = data.name.nativeName;
     const nativeName = Object.values(nativeNames)[0].common;
@@ -209,8 +240,8 @@ const renderCountry = country => {
     const language = languagesArr.join(', ');
 
     //Format Border Countries
-    const borders = Object.assign({}, data.borders);
-    console.log(borders);
+    const borders = Object.assign({}, data.borders.slice(0,3));
+    
      
      //INSERT DATA IN HTML
      countryElement.innerHTML = ` 
@@ -270,17 +301,11 @@ const renderCountry = country => {
                 </div>
                 <div class="border-countries-btns">
                 ${Object.keys(borders).map(function (key) {
-                    return "<button class='country-btn'  value='" + key + "'>" +borders[key] + "</button>"           
-                }).join("")}
-                
-              
-            </div>`
-           }
-         
-        </div>
-    
-   
-    `;
+                    return "<button class='country-btn'  value='" + borders[key] + "'>" +borders[key] + "</button>"           
+                }).join("")}    
+                </div>`
+                }
+            </div>`;
        
 }
 
@@ -350,13 +375,33 @@ const getCountry = (name) => {
     })
 }
 
+//Get specific country by code (for Country Single Page)
+const getCountryByCode = (code) => {
+
+    axios.get(`https://restcountries.com/v3.1/alpha/${code.replace(/\"/g, "")}`)
+    .then(function (response) {
+          
+        const countryData = response.data;
+
+        renderCountry(countryData);
+    
+    }).catch(function (error) {
+       
+        console.log(error);
+    })
+}
+
 
 const CountryPageInit = () => {
      
     // console.log('Hello this is counrty page!!!');
      const name = JSON.stringify(localStorage.getItem('country-name'));
+     const code = JSON.stringify(localStorage.getItem('country-code'));
+  
 
-     getCountry(name);
+   //check if country page is redirected / reloade
 
+   (performance.navigation.type == performance.navigation.TYPE_RELOAD) 
+   ?  getCountryByCode(code): getCountry(name)
    
 }
