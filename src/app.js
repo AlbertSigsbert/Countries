@@ -185,14 +185,35 @@ const renderCountries = countriesData => {
 const renderCountry = country => {
     const countryElement = document.querySelector('.country');
     const data = country[0];
-
     console.log(data);
-  
-    const buildItem = (obj) => {
-        return item;
-     } ;
-     countryElement.innerHTML = ` 
+    //Format native Name
+    const nativeNames = data.name.nativeName;
+    const nativeName = Object.values(nativeNames)[0].common;
 
+     //Format Currencies
+    const currencies = data.currencies;
+    let currencyArr = []
+    for( const key in currencies){
+          currencyArr.push(currencies[key].name)
+          
+    }
+    const currency = currencyArr.join(', ');
+
+    //Format Languages
+    const languages = data.languages;
+    let languagesArr = []
+    for( const key in languages){
+          languagesArr.push(languages[key])
+          
+    }
+    const language = languagesArr.join(', ');
+
+    //Format Border Countries
+    const borders = Object.assign({}, data.borders);
+    console.log(borders);
+     
+     //INSERT DATA IN HTML
+     countryElement.innerHTML = ` 
      <div class="country-image">
             <img src="${data.flags.svg}" alt="${data.name.common}">
         </div>
@@ -203,7 +224,7 @@ const renderCountry = country => {
                     <ul>
                         <li>
                             <span class="item-key">Native Name: </span>
-                            <span class="item-value">${data.name}</span>
+                            <span class="item-value">${nativeName}</span>
                         </li>
                         <li>
                             <span class="item-key">Population: </span>
@@ -232,38 +253,37 @@ const renderCountry = country => {
                         </li>
                         <li>
                             <span class="item-key">Currencies: </span>
-                            <span class="item-value">${data.currencies}</span>
+                            <span class="item-value">${currency}</span>
                         </li>
                         <li>
                             <span class="item-key">Languages: </span>
-                            <span class="item-value">${data.languages}</span>
+                            <span class="item-value">${language}</span>
                         </li>
                     </ul>
                 </div>
             </div>
-           
+
+           ${ Object.keys(borders).length === 0 && borders.constructor === Object ? '' : `
             <div class="border-countries">
                 <div class="border-countries-label">
                     <h4>Border Countries:</h4>
                 </div>
                 <div class="border-countries-btns">
-                    <button class="country-btn">
-                        ${data.borders[0]}
-                    </button>
-                    <button class="country-btn">
-                        ${data.borders[1]}
-                    </button>
-                    <button class="country-btn">
-                        ${data.borders[2]}
-                    </button>
-                </div>
-            </div>
+                ${Object.keys(borders).map(function (key) {
+                    return "<button class='country-btn'  value='" + key + "'>" +borders[key] + "</button>"           
+                }).join("")}
+                
+              
+            </div>`
+           }
+         
         </div>
     
    
     `;
        
 }
+
 
 //API REQUESTS 
 //Get all countries

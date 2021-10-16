@@ -259,7 +259,7 @@ nav{
 
 .border-countries{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     margin-left: 4.5rem;   
 } 
 .border-countries-label{
@@ -272,6 +272,7 @@ nav{
     width: 6rem;
     padding: .5rem; 
     margin-right:1rem;
+    margin-bottom: 1rem; 
     background: var(--elements-color); 
     color: var(--text-color);
     box-shadow: var(--box-shadow);
@@ -339,7 +340,8 @@ nav{
     }
     .country-btn{
         width: 4rem;
-        margin-right:.5rem;   
+        margin-right:.5rem;
+         
     }
     
    
