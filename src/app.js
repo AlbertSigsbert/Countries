@@ -63,11 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log(url);
     
+    console.log( url.includes('country.html'));
      
-    url.includes('/country.html') ? CountryPageInit() : getAllCountries();
+    url.includes('country.html') ? getAllCountries() : CountryPageInit();
 
     //Render HomePage Event Listners
-    url.includes('/country.html') ?  loadEventListeners() : loadHomeEventListeners();
+    url.includes('country.html') ? loadHomeEventListeners(): loadEventListeners();
 })
 
 const loadHomeEventListeners = () => {
