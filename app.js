@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log(url);
     
-    console.log( url.includes('country.html'));
+    url.includes('country.html');
      
     url.includes('country.html') ? getAllCountries() : CountryPageInit();
 
