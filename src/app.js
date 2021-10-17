@@ -250,7 +250,9 @@ const renderCountry = country => {
     const language = languagesArr.join(', ');
 
     //Format Border Countries
-    const borders = Object.assign({}, data.borders.slice(0,3));
+    threeBorders = data.borders.slice(0,3);
+
+    const borders = Object.assign({}, threeBorders);
     
      
      //INSERT DATA IN HTML
