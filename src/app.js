@@ -61,15 +61,21 @@ document.addEventListener('DOMContentLoaded', () => {
     //Render content to UI based ON page
     const url = window.location.href.toString();
 
-    // console.log(url);
-    
-    // console.log( !url.includes('country.html'));
-   
-     
-    !(url.includes('country.html')) ?  CountryPageInit() : getAllCountries();
+     if (url.includes('country.html')) {
+        CountryPageInit()
 
-    //Render HomePage Event Listners
-    !(url.includes('country.html')) ? loadEventListeners() :  loadHomeEventListeners();
+        loadEventListeners()
+         
+     }
+
+     else{
+        getAllCountries()
+
+        loadHomeEventListeners()
+
+     }
+   
+   
 })
 
 const loadHomeEventListeners = () => {
