@@ -28,7 +28,9 @@ Your users should be able to:
 
 
 ## Screenshots
+![Desktop view of my solution](./img/desktop.jpg)
 
+![Mobile view of my solution](./img/mobile.jpg)
 
 ## Links
 
