@@ -10,7 +10,7 @@ Thanks for checking out this front-end coding challenge.
 
 **To do this challenge, you need a good understanding of JavaScript.**
 
-## **This is my Solution.** :trophy::trophy::trophy:
+**This is my Solution.** :trophy::trophy::trophy:
 
 ## The challenge
 
