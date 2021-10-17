@@ -39,7 +39,7 @@ Your users should be able to:
 ## Built with
 - HTML5
 - CSS (Grid, flexbox and custom properties)
-- JS  (local storage, Arrow functions, Promises etc)
+- Vanilla JS  (local storage, Arrow functions, Promises etc)
 - Axios HTTP Library
 
 ## What I learned
@@ -52,7 +52,9 @@ Your users should be able to:
  - React styled components, custom hooks and routers
 
 ## Useful resources
-- [Multiple class selectors](https://css-tricks.com/multiple-class-id-selectors/)
+
+- [Multiple class selectors](https://css-tricks.com/multiple-class-id-selectors/) - This helped me how to select multiple classes in the same element
+- [Stackoverflow] (https://stackoverflow.com/) - This helped me in debugging process
 
 ## Author
 
