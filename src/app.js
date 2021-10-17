@@ -60,12 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Render content to UI based ON page
     const url = window.location.href.toString();
+
+    console.log(url);
     
      
-    url.includes('index') ? getAllCountries() : CountryPageInit();
+    url.includes('countryz') ? getAllCountries() : CountryPageInit();
 
     //Render HomePage Event Listners
-    url.includes('index') ? loadHomeEventListeners(): loadEventListeners();
+    url.includes('countryz') ? loadHomeEventListeners(): loadEventListeners();
 })
 
 const loadHomeEventListeners = () => {
