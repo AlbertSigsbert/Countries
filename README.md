@@ -34,7 +34,8 @@ Your users should be able to:
 - [Youtube Demo] Coming Soon!!!
 
 ## My Process
-
+   I am planning to write a blog post/video about it soon!!!
+   
 ## Built with
 - HTML5
 - CSS (Grid, flexbox and custom properties)
