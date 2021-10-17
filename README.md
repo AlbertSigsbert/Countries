@@ -43,7 +43,9 @@ Your users should be able to:
 
 ## Author
 
-
+- [Instagram](https://www.instagram.com/albert_sigsbert/)
+- [LinkedIn](https://www.linkedin.com/in/albertsigsbert/)
+- [Twitter](https://twitter.com/albert_sigsbert)
 
 
 
