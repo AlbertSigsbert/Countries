@@ -54,7 +54,7 @@ Your users should be able to:
 ## Useful resources
 
 - [Multiple class selectors](https://css-tricks.com/multiple-class-id-selectors/) - This helped me how to select multiple classes in the same element
-- [Stackoverflow] (https://stackoverflow.com/) - This helped me in debugging process
+- [Stackoverflow](https://stackoverflow.com/) - This helped me in debugging process
 
 ## Author
 
