@@ -34,12 +34,22 @@ Your users should be able to:
 ## My Process
 
 ## Built with
+- HTML5
+- CSS (Grid, flexbox and custom properties)
+- JS  (local storage, Arrow functions, Promises etc)
+- Axios HTTP Library
 
 ## What I learned
+- Performing JS logic in JS template literals
+- Custom routing
+- CSS tricks like multiple class selectors
 
 ## Continued Development
+ The next time I want to implement this project by using
+ - React styled components, custom hooks and routers
 
 ## Useful resources
+- [Multiple class selectors](https://css-tricks.com/multiple-class-id-selectors/)
 
 ## Author
 
