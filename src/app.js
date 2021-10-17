@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(url);
     
      
-    url.includes('country.html') ? CountryPageInit() : getAllCountries();
+    url.includes('/country.html') ? CountryPageInit() : getAllCountries();
 
     //Render HomePage Event Listners
-    url.includes('country.html') ?  loadEventListeners() : loadHomeEventListeners();
+    url.includes('/country.html') ?  loadEventListeners() : loadHomeEventListeners();
 })
 
 const loadHomeEventListeners = () => {
