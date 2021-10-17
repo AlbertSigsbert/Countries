@@ -30,7 +30,7 @@ Your users should be able to:
 ## Screenshots
 <img src="img/desktop.png">
 
-<img src="img/mobile.png">
+<img src="img/mobile.png" width="50%;">
 
 ## Links
 
