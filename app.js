@@ -407,8 +407,10 @@ const getCountryByCode = (code) => {
 const CountryPageInit = () => {
      
     // console.log('Hello this is counrty page!!!');
-     const name = JSON.stringify(localStorage.getItem('country-name'));
-     const code = JSON.stringify(localStorage.getItem('country-code'));
+     const name = localStorage.getItem('country-name');
+     const code = localStorage.getItem('country-code');
+
+     
   
 
    //check if country page is redirected / reloade
